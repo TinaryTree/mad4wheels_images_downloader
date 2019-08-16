@@ -12,8 +12,8 @@ req = requests.get(base_url)
 html = etree.HTML(req.text)
 img_urls = html.xpath('//div[@class="col-lg-4 mb-5"]//img[@class="horizontal"]/@src')
 
-start = 0
-end = len(img_urls)
+start = 0  # 这里起始索引
+end = 99999999  # 这里是结束索引
 urls = (img_url.replace('desktop', 'hires') for img_url in img_urls[start:end])
 
 q = queue.Queue()
