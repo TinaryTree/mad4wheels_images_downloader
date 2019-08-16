@@ -7,10 +7,14 @@ import queue
 # hires_url = 'https://www.mad4wheels.com/img/free-car-images/hires/17502/dodge-charger-srt-hellcat-widebody-daytona-50th-anniversary-edition-2020-556190.jpg'
 # desktop_url = 'https://www.mad4wheels.com/img/free-car-images/desktop/17502/dodge-charger-srt-hellcat-widebody-daytona-50th-anniversary-edition-2020-556190.jpg'
 base_url = 'https://www.mad4wheels.com/dodge/charger-srt-hellcat-widebody-daytona-50th-anniversary-edition-2020'
+
 req = requests.get(base_url)
 html = etree.HTML(req.text)
 img_urls = html.xpath('//div[@class="col-lg-4 mb-5"]//img[@class="horizontal"]/@src')
-urls = (img_url.replace('desktop', 'hires') for img_url in img_urls)
+
+start = 0
+end = len(img_urls)
+urls = (img_url.replace('desktop', 'hires') for img_url in img_urls[start:end])
 
 q = queue.Queue()
 for url in urls:
